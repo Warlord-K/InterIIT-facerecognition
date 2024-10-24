@@ -20,7 +20,7 @@ A Python-based real-time face recognition system that combines YOLO face detecti
 
 1. Clone this repository:
 ```bash
-git clone [repository-url]
+git clone https://github.com/Warlord-K/InterIIT-facerecognition.git
 cd InterIIT-facerecognition
 ```
 
