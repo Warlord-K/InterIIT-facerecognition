@@ -1,0 +1,5 @@
+protobuf==3.20
+opencv-python
+ultralytics
+astropy
+git+https://github.com/Warlord-K/arcface-tensorflowlite.git
