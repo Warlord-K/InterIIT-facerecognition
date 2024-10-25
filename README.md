@@ -1,4 +1,4 @@
-# Real-time Face Recognition System
+# Real-time Face Recognition System | [DEMO](https://huggingface.co/spaces/Warlord-K/FaceRecognition-InterIIT)
 
 A Python-based real-time face recognition system that combines YOLO face detection with ArcFace embeddings for accurate face recognition. The system processes webcam feed in real-time, detecting faces and matching them against a stored database of known faces.
 
