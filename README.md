@@ -10,6 +10,7 @@ A Python-based real-time face recognition system that combines YOLO face detecti
 - Interactive interface for adding new faces to the database
 - Configurable confidence thresholds for detection and recognition
 - Live display of recognition results with bounding boxes and names
+- Batch processing tool for building face database from image folders
 
 ## Prerequisites
 
@@ -33,6 +34,8 @@ pip install -r requirements.txt
 
 ## Usage
 
+### Real-time Recognition
+
 1. Run the main script:
 ```bash
 python face_recognition_system.py
@@ -44,7 +47,43 @@ python face_recognition_system.py
   - When prompted, enter the name for the face
   - The current frame will be used to generate embeddings
 
+### Building Database from Images
+
+The system includes a database builder tool that can process a folder structure of images to create a face database. The expected folder structure is:
+
+```
+base_folder/
+├── IITI/
+│   ├── Abhinav_Kumar.jpg
+│   └── ...
+├── IITB/
+│   ├── Yatharth_Gupta.jpg
+│   └── ...
+└── IITK/
+    ├── Rahul_Sharma.jpg
+    └── ...
+```
+
+1. Organize your images in folders by institution
+2. Run the database builder:
+```bash
+python create_database.py
+```
+
+The script will:
+- Process all images in the institution folders
+- Create standardized names (e.g., AbhinavK_IITI from Abhinav_Kumar.jpg)
+- Add face embeddings to the database
+- Report processing statistics
+
+Supported image formats:
+- .jpg
+- .jpeg
+- .png
+
 ## Configuration
+
+### Face Recognition System
 
 You can modify the following parameters in the `FaceRecognitionSystem` class initialization:
 
@@ -54,6 +93,15 @@ face_system = FaceRecognitionSystem(
     confidence_threshold=0.5,           # Minimum confidence for YOLO detection
     similarity_threshold=0.6            # Maximum distance for face recognition match
 )
+```
+
+### Database Builder
+
+You can configure the database builder in the `main()` function of `create_database.py`:
+
+```python
+base_folder = "path/to/your/base/folder"  # Path to folder containing institution folders
+database_path = "face_database.pkl"        # Path to save/update the database
 ```
 
 ## System Architecture
@@ -73,6 +121,7 @@ The system consists of three main components:
 3. **Database Management**
    - Stores face embeddings with associated names
    - Supports adding new faces during runtime
+   - Supports batch processing of image folders
    - Persists data between sessions using pickle
 
 ## Performance Considerations
@@ -101,3 +150,9 @@ Common issues and solutions:
    - Reduce frame resolution
    - Increase confidence threshold to process fewer detections
    - Consider using GPU acceleration if available
+
+4. **Database builder issues:**
+   - Ensure images are in supported formats
+   - Check folder structure matches expected hierarchy
+   - Verify image file names follow the expected format (Name_Surname.jpg)
+   - Check console output for specific error messages and processing statistics
